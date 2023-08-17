@@ -1,0 +1,45 @@
+# {{ vpn_name }}
+#
+# ISP IP:{{ remote_addrs }}:
+# Device:{{ device }}
+# Contact:{{ contact }}
+# Phone:{{ phone }}
+# Email:{{ email }} 
+
+connections {
+        {{ parent_conn_name }} {
+                version={{ ike_version }}
+                fragmentation=no
+                send_certreq=no
+                send_cert=never
+                keyingtries=0
+                rekey_time={{ ike_lifetime }}s
+                remote_addrs={{ remote_addrs }}
+                local_addrs={{ local_addrs }}
+                proposals={{ ike_encryption }}-{{ ike_hash }}-{{ ike_dh }}
+                children {
+                        {{ child_conn_name }} {
+                                start_action={{ start_action }}
+                                life_time={{ esp_lifetime }}s
+                                esp_proposals={{ esp_encryption }}-{{ esp_hash }}-{{ esp_dh }}
+                                local_ts={{ local_ts }}
+                                remote_ts={{ remote_ts }}
+                        }
+
+                }
+                local-0 {
+                        auth = psk
+                        id=64.186.38.26
+                }
+                remote-0 {
+                        auth = psk
+                        id={{ remote_addrs }}
+                }
+        }
+}
+secrets {
+        ike-{{ parent_conn_name }} {
+                id={{ remote_addrs }}
+                secret = {{ psk }}
+        }
+}

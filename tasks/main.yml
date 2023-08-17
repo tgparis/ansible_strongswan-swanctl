@@ -1,0 +1,16 @@
+---
+- name: copy template swanctl.conf
+  template:
+   src: swanctl.conf.j2
+   dest: /etc/swanctl/conf.d/staging/{{ parent_conn_name }}.conf
+   owner: root
+   group: root
+   mode: 0644
+
+# To Do: Add a bash script to parse the IP addresses from the swanctl.conf file and allow in IPTables
+#- name: copy firewall script
+#
+#- name: run firewall script
+#
+- name: load credentials, pools authorities and connections
+  command: swanctl -q

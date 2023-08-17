@@ -1,0 +1,100 @@
+---
+# main.yml for swanctl ansible automation
+- hosts: mie-fwdc-vpn1.med-web.com
+  become: true
+  gather_facts: true
+  tags:
+    - swanctl
+  vars_prompt:
+
+    - name: "vpn_name"
+      prompt: "Enter the name of the VPN (comment at top of file)"
+      private: no
+
+    - name: "device"
+      prompt: "Enter the device type (e.g. Cisco, Juniper, etc.)"
+      private: no
+
+    - name: "contact"
+      prompt: "Enter the contact's name for this VPN"
+      private: no
+
+    - name: "phone"
+      prompt: "Enter the contact's phone number for this VPN"
+      private: no
+    
+    - name: "email"
+      prompt: "Enter the contact's email address for this VPN"
+      private: no
+    
+    - name: "parent_conn_name"
+      prompt: "Enter the parent conn name(IKE/Phase1)"
+      private: no
+
+    - name: "local_addrs"
+      prompt: "Enter the local gateway IP"
+      private: no
+
+    - name: remote_addrs
+      prompt: "Enter the remote gateway IP"
+      private: no  
+
+    - name: ike_version
+      prompt: "IKE version(enter 1 or 2)"
+      private: no
+
+    - name: ike_encryption
+      prompt: "Enter the IKE encryption (https://docs.strongswan.org/docs/5.9/config/IKEv2CipherSuites.html)"
+      private: no
+
+    - name: ike_hash
+      prompt: "Enter the IKE hash (https://docs.strongswan.org/docs/5.9/config/IKEv2CipherSuites.html)"
+      private: no
+
+    - name: ike_dh
+      prompt: "Enter the IKE DH group (https://docs.strongswan.org/docs/5.9/config/IKEv2CipherSuites.html)"
+      private: no
+
+    - name: ike_lifetime
+      prompt: "Enter the IKE lifetime(in seconds)"
+      private: no
+
+    - name: child_conn_name
+      prompt: "Enter the child conn name"
+      private: no
+
+    - name: esp_encryption
+      prompt: "Enter the ESP(phase2) encryption (https://docs.strongswan.org/docs/5.9/config/ESPAlgorithms.html)"
+      private: no
+
+    - name: esp_hash
+      prompt: "Enter the ESP(phase2) hash (https://docs.strongswan.org/docs/5.9/config/ESPAlgorithms.html)"
+      private: no
+
+    - name: esp_dh
+      prompt: "Enter the ESP(phase2) DH group (https://docs.strongswan.org/docs/5.9/config/ESPAlgorithms.html)"
+      private: no
+
+    - name: esp_lifetime
+      prompt: "Enter the ESP(phase2) lifetime(in seconds)"
+      private: no
+
+    - name: start_action
+      prompt: "Enter the start action, none, trap(route), start (https://docs.strongswan.org/projects/strongswan/wiki/ConnSection)"
+      private: no
+
+    - name: local_ts
+      prompt: "Enter the local subnet"
+      private: no
+
+    - name: remote_ts
+      prompt: "Enter the remote subnet"
+      private: no
+
+    - name: psk
+      prompt: "Enter the PSK"
+      private: no
+ 
+  tasks:
+    - name: Configure swanctl
+      include: tasks/main.yml
