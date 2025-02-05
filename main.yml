@@ -1,6 +1,6 @@
 ---
 # main.yml for swanctl ansible automation
-- hosts: mie-fwdc-vpn1.med-web.com
+- hosts:
   become: true
   gather_facts: true
   tags:
