@@ -1,9 +1,9 @@
 # ansible_ipsec
-Ansible that creates and IPSec configuration in the swanctl format
+Ansible that creates an IPSec configuration in the Swanctl config format.
 
 ## Instructions
-Update inventory/hosts.
-Run sudo ansible-playbook -i inventory/hosts main.yml
+Add host.
+Run sudo ansible-playbook -i hosts main.yml
 
 The swanctl formatted configuration file will be located in /etc/swanctl/conf.d/{{ parent_conn_name }}
 
